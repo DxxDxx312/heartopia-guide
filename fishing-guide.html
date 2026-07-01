@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>钓鱼图鉴大全 - 心动小镇攻略站</title>
+  <meta name="description" content="心动小镇钓鱼全图鉴，包含鱼类分布、出现条件、天气时间影响、稀有鱼钓法与鱼类用途汇总。">
+  <style>
+    :root {
+      --bg: #FFF8F0;
+      --primary: #FFB347;
+      --primary-dark: #f09a1e;
+      --green: #90EE90;
+      --green-dark: #5ec85e;
+      --text: #5a4535;
+      --subtext: #8c7560;
+      --white: #ffffff;
+      --radius: 20px;
+      --shadow: 0 8px 28px rgba(255,179,71,0.13);
+      --shadow-hover: 0 14px 36px rgba(255,179,71,0.22);
+      --max-w: 800px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(var(--max-w), 94%);
+      margin: 0 auto;
+    }
+
+    /* 导航栏 */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(255,248,240,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,179,71,0.12);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      white-space: nowrap;
+    }
+
+    .logo-icon {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--primary), #ffd18c);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(255,179,71,0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      padding: 8px 14px;
+      border-radius: 99px;
+      font-size: 0.93rem;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,179,71,0.15);
+      color: var(--primary-dark);
+    }
+
+    .nav-links .active {
+      background: rgba(255,179,71,0.2);
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    /* 面包屑 */
+    .breadcrumb {
+      padding: 20px 0 10px;
+      font-size: 0.9rem;
+      color: var(--subtext);
+    }
+
+    .breadcrumb a { color: var(--primary-dark); }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    /* 文章卡片 */
+    .article-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 40px 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,179,71,0.12);
+      margin-bottom: 24px;
+    }
+
+    .article-header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,179,71,0.15);
+    }
+
+    .article-tag {
+      display: inline-block;
+      background: rgba(144,238,144,0.22);
+      color: #4a854a;
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+    }
+
+    .article-title {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    .article-meta {
+      color: var(--subtext);
+      font-size: 0.9rem;
+    }
+
+    /* 目录 */
+    .toc {
+      background: rgba(255,179,71,0.08);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(255,179,71,0.15);
+    }
+
+    .toc h3 {
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      color: var(--primary-dark);
+    }
+
+    .toc ul {
+      list-style: none;
+      padding-left: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 6px;
+    }
+
+    .toc li {
+      padding: 6px 0;
+      font-size: 0.95rem;
+    }
+
+    .toc a {
+      color: var(--text);
+      display: block;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .toc a:hover {
+      background: rgba(255,179,71,0.1);
+    }
+
+    /* 正文 */
+    .article-body h2 {
+      font-size: 1.3rem;
+      color: var(--primary-dark);
+      margin: 32px 0 16px;
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .article-body h3 {
+      font-size: 1.1rem;
+      color: var(--text);
+      margin: 24px 0 12px;
+    }
+
+    .article-body p {
+      margin-bottom: 16px;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .article-body ul, .article-body ol {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+
+    .article-body li {
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .article-body strong {
+      color: var(--primary-dark);
+    }
+
+    /* 表格 */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.95rem;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .data-table th {
+      background: rgba(255,179,71,0.15);
+      color: #8b6914;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      border-bottom: 2px solid rgba(255,179,71,0.2);
+    }
+
+    .data-table td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(255,179,71,0.1);
+      color: var(--text);
+    }
+
+    .data-table tr:nth-child(even) {
+      background: rgba(255,248,240,0.5);
+    }
+
+    .data-table tr:hover {
+      background: rgba(255,179,71,0.06);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .tag-common { background: #e8f5e9; color: #2e7d32; }
+    .tag-rare { background: #fff3e0; color: #ef6c00; }
+    .tag-legend { background: #fce4ec; color: #c62828; }
+
+    /* 提示框 */
+    .tip-box {
+      background: rgba(144,238,144,0.12);
+      border-left: 4px solid var(--green);
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+      color: #4d7a4d;
+    }
+
+    .tip-box strong { color: #3a6a3a; }
+
+    .warning-box {
+      background: rgba(255,179,71,0.1);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+      color: var(--text);
+    }
+
+    /* 步骤卡片 */
+    .step-card {
+      display: flex;
+      gap: 16px;
+      padding: 18px;
+      background: rgba(255,248,240,0.8);
+      border-radius: 16px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(255,179,71,0.12);
+    }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 0.9rem;
+    }
+
+    .step-content h4 {
+      color: var(--primary-dark);
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      color: var(--subtext);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* 返回按钮 */
+    .back-bar {
+      margin: 32px 0;
+      text-align: center;
+    }
+
+    .back-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      border-radius: 99px;
+      font-size: 1rem;
+      box-shadow: 0 6px 14px rgba(255,179,71,0.22);
+      transition: transform 0.2s;
+    }
+
+    .back-btn:hover { transform: translateY(-2px); }
+
+    /* 页脚 */
+    .footer {
+      margin-top: 40px;
+      border-top: 1px solid rgba(255,179,71,0.12);
+      background: rgba(255,255,255,0.5);
+      padding: 24px 0;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--subtext);
+    }
+
+    /* 响应式 */
+    @media (max-width: 600px) {
+      .article-card { padding: 24px 18px; }
+      .article-title { font-size: 1.4rem; }
+      .nav { flex-direction: column; height: auto; padding: 12px 0; align-items: flex-start; }
+      .nav-links { width: 100%; }
+      .toc ul { grid-template-columns: 1fr; }
+      .data-table { font-size: 0.85rem; }
+      .data-table th, .data-table td { padding: 8px; }
+      .step-card { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="wrap nav">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">❤</span>
+        <span>心动小镇攻略站</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="index.html#guides">攻略汇总</a>
+        <a href="newbie-guide.html">新手攻略</a>
+        <a href="fishing-guide.html" class="active">钓鱼图鉴</a>
+        <a href="index.html#codes">兑换码</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="breadcrumb">
+      <a href="index.html">首页</a> &gt; <span>钓鱼图鉴大全</span>
+    </div>
+
+    <article class="article-card">
+      <div class="article-header">
+        <span class="article-tag">🎣 人气图鉴</span>
+        <h1 class="article-title">心动小镇钓鱼图鉴大全</h1>
+        <p class="article-meta">更新时间：2026-07-01 | 阅读时间：约 8 分钟</p>
+      </div>
+
+      <div class="toc">
+        <h3>📋 本文目录</h3>
+        <ul>
+          <li><a href="#s1">一、钓鱼基础机制</a></li>
+          <li><a href="#s2">二、鱼类图鉴总表</a></li>
+          <li><a href="#s3">三、钓点与天气条件</a></li>
+          <li><a href="#s4">四、稀有鱼钓法技巧</a></li>
+          <li><a href="#s5">五、鱼类用途与收益</a></li>
+        </ul>
+      </div>
+
+      <div class="article-body">
+
+        <h2 id="s1">一、钓鱼基础机制</h2>
+        <p>钓鱼是心动小镇中<strong>体力消耗最低</strong>的采集活动之一，每次抛竿消耗约 5 点体力，是前期稳定赚钱和完成图鉴的核心玩法。</p>
+
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>获取鱼竿</h4>
+            <p>完成新手引导后，在商店购买基础鱼竿（约 200 金币）。后续可升级至铜/银/金鱼竿，提升稀有鱼上钩率。</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>抛竿与收杆</h4>
+            <p>靠近水域点击钓鱼按钮，等待浮标下沉时快速点击收杆。注意浮标完全下沉前的<strong>轻微抖动</strong>是预警信号，提前准备点击。</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>鱼饵选择</h4>
+            <p>普通鱼饵可钓常见鱼；<strong>人鱼吸引剂</strong>（活动/商店获取）可大幅提升稀有鱼出现概率，建议留给传说鱼目标。</p>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 小贴士：</strong>每天前 10 次钓鱼有额外成就奖励，建议每天优先完成。钓鱼等级提升后，可解锁自动钓鱼功能，挂机更轻松。
+        </div>
+
+        <h2 id="s2">二、鱼类图鉴总表</h2>
+        <p>以下是目前版本中已确认的主要鱼类信息，按稀有度分类。价格随星级和钓鱼等级浮动，以下为基础参考价。</p>
+
+        <h3>常见鱼类（出现概率高）</h3>
+        <table class="data-table">
+          <tr>
+            <th>鱼类</th>
+            <th>出现地点</th>
+            <th>时间</th>
+            <th>天气</th>
+            <th>基础售价</th>
+          </tr>
+          <tr>
+            <td>鲫鱼 <span class="tag tag-common">常见</span></td>
+            <td>小镇河流</td>
+            <td>全天</td>
+            <td>任意</td>
+            <td>50 金币</td>
+          </tr>
+          <tr>
+            <td>草鱼 <span class="tag tag-common">常见</span></td>
+            <td>小镇河流</td>
+            <td>全天</td>
+            <td>任意</td>
+            <td>60 金币</td>
+          </tr>
+          <tr>
+            <td>鲤鱼 <span class="tag tag-common">常见</span></td>
+            <td>湖泊/河流</td>
+            <td>6:00-18:00</td>
+            <td>晴天</td>
+            <td>80 金币</td>
+          </tr>
+          <tr>
+            <td>沙丁鱼 <span class="tag tag-common">常见</span></td>
+            <td>海边码头</td>
+            <td>全天</td>
+            <td>任意</td>
+            <td>40 金币</td>
+          </tr>
+          <tr>
+            <td>河豚 <span class="tag tag-common">常见</span></td>
+            <td>海边码头</td>
+            <td>12:00-18:00</td>
+            <td>晴天</td>
+            <td>70 金币</td>
+          </tr>
+        </table>
+
+        <h3>稀有鱼类（出现概率中等）</h3>
+        <table class="data-table">
+          <tr>
+            <th>鱼类</th>
+            <th>出现地点</th>
+            <th>时间</th>
+            <th>天气</th>
+            <th>基础售价</th>
+          </tr>
+          <tr>
+            <td>彩虹鱼 <span class="tag tag-rare">稀有</span></td>
+            <td>海边码头</td>
+            <td>18:00-6:00</td>
+            <td>雨天</td>
+            <td>300 金币</td>
+          </tr>
+          <tr>
+            <td>金枪鱼 <span class="tag tag-rare">稀有</span></td>
+            <td>深海钓点</td>
+            <td>6:00-12:00</td>
+            <td>晴天</td>
+            <td>450 金币</td>
+          </tr>
+          <tr>
+            <td>电鳗 <span class="tag tag-rare">稀有</span></td>
+            <td>瀑布下方</td>
+            <td>0:00-6:00</td>
+            <td>雷雨</td>
+            <td>380 金币</td>
+          </tr>
+          <tr>
+            <td>锦鲤 <span class="tag tag-rare">稀有</span></td>
+            <td>小镇河流</td>
+            <td>6:00-18:00</td>
+            <td>晴天</td>
+            <td>500 金币</td>
+          </tr>
+        </table>
+
+        <h3>传说鱼类（极低概率，收藏价值高）</h3>
+        <table class="data-table">
+          <tr>
+            <th>鱼类</th>
+            <th>出现地点</th>
+            <th>时间</th>
+            <th>天气</th>
+            <th>基础售价</th>
+          </tr>
+          <tr>
+            <td>蓝鲸 <span class="tag tag-legend">传说</span></td>
+            <td>深海钓点</td>
+            <td>0:00-3:00</td>
+            <td>暴风雨</td>
+            <td>2000 金币</td>
+          </tr>
+          <tr>
+            <td>金龙鱼 <span class="tag tag-legend">传说</span></td>
+            <td>瀑布上方</td>
+            <td>5:00-7:00</td>
+            <td>彩虹天</td>
+            <td>2500 金币</td>
+          </tr>
+          <tr>
+            <td>美人鱼之泪 <span class="tag tag-legend">传说</span></td>
+            <td>海边码头</td>
+            <td>满月夜晚</td>
+            <td>晴朗</td>
+            <td>3000 金币</td>
+          </tr>
+        </table>
+
+        <h2 id="s3">三、钓点与天气条件</h2>
+        <p>不同水域和天气会显著影响鱼群分布，掌握规律可以大幅提升目标鱼上钩率。</p>
+
+        <h3>主要钓点分布</h3>
+        <ul>
+          <li><strong>小镇河流：</strong>家门口附近，适合钓鲫鱼、草鱼、鲤鱼、锦鲤等淡水鱼</li>
+          <li><strong>湖泊：</strong>地图中部大水域，淡水鱼种类更丰富，夜晚出现稀有鱼概率提升</li>
+          <li><strong>海边码头：</strong>地图东南角，海鱼专属区域，雨天彩虹鱼群聚</li>
+          <li><strong>深海钓点：</strong>需乘船或解锁码头尽头，传说鱼唯一出现地</li>
+          <li><strong>瀑布区域：</strong>分上下两层，上层出金龙鱼，下层出电鳗</li>
+        </ul>
+
+        <h3>天气影响汇总</h3>
+        <table class="data-table">
+          <tr>
+            <th>天气</th>
+            <th>影响效果</th>
+            <th>推荐钓点</th>
+          </tr>
+          <tr>
+            <td>🌞 晴天</td>
+            <td>常见鱼活跃，基础收益稳定</td>
+            <td>河流、湖泊</td>
+          </tr>
+          <tr>
+            <td>🌧️ 雨天</td>
+            <td>稀有鱼出现率 +30%，彩虹鱼群聚</td>
+            <td>海边码头</td>
+          </tr>
+          <tr>
+            <td>⛈️ 雷雨</td>
+            <td>电鳗等特殊鱼出现，传说鱼概率微增</td>
+            <td>瀑布下方</td>
+          </tr>
+          <tr>
+            <td>🌈 彩虹天</td>
+            <td>所有鱼类收益翻倍，传说鱼出现率最高</td>
+            <td>全钓点</td>
+          </tr>
+          <tr>
+            <td>🌙 满月</td>
+            <td>夜间特殊鱼"美人鱼之泪"限定出现</td>
+            <td>海边码头</td>
+          </tr>
+        </table>
+
+        <div class="warning-box">
+          <strong>⚠️ 注意：</strong>天气每天随机变化，建议早上起床先看天气，如果是雨天或彩虹天，优先安排钓鱼活动，收益最大化。
+        </div>
+
+        <h2 id="s4">四、稀有鱼钓法技巧</h2>
+
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>提升钓鱼等级</h4>
+            <p>多钓常见鱼积累经验，等级越高，稀有鱼上钩率越高。达到 5 级后解锁"精准收杆"，缩小判定范围但奖励更好。</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>使用人鱼吸引剂</h4>
+            <p>在目标钓点使用吸引剂后，稀有鱼出现概率翻倍。建议在雨天去海边码头使用，叠加天气加成，彩虹鱼几乎必出。</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>蹲守传说鱼窗口期</h4>
+            <p>传说鱼有严格的现实时间窗口（如金龙鱼只在清晨 5-7 点出现）。提前 5 分钟到位，连续抛竿 20 次以上，耐心是关键。</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>连钓奖励机制</h4>
+            <p>同一钓点连续钓上 5 条鱼不切换地点，会触发"鱼群聚集"隐藏 buff，接下来 3 次钓到稀有鱼概率大幅提升。</p>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>🎯 传说鱼建议：</strong>不要急着卖传说鱼！部分主线任务和收藏成就需要提交指定传说鱼，建议每种至少留 1 条在仓库。
+        </div>
+
+        <h2 id="s5">五、鱼类用途与收益</h2>
+
+        <h3>直接出售</h3>
+        <p>最基础的收益方式，鱼星级越高售价越高。1 星鱼为基础价，5 星鱼可达基础价 3 倍。钓鱼等级 10 级后解锁"鱼市商人"，批量出售额外 +10% 收益。</p>
+
+        <h3>烹饪料理</h3>
+        <p>鱼类是高级料理的核心材料：</p>
+        <ul>
+          <li><strong>清蒸鱼：</strong>鲫鱼/草鱼 + 姜 → 恢复 35 点体力</li>
+          <li><strong>海鲜拼盘：</strong>沙丁鱼 + 河豚 + 番茄 → 恢复 60 点体力，适合下矿前吃</li>
+          <li><strong>锦鲤刺身：</strong>锦鲤 + 酱油 → 恢复 80 点体力，前期最强料理之一</li>
+        </ul>
+
+        <h3>任务与收藏</h3>
+        <p>部分居民委托和主线任务需要指定鱼类。完成全图鉴收集可解锁<strong>"钓鱼大师"</strong>称号和限定鱼竿皮肤，收藏价值极高。</p>
+
+        <h3>送礼好感</h3>
+        <p>NPC 对鱼类礼物接受度普遍较高，尤其是稀有鱼可大幅提升好感度。推荐送给喜欢户外活动的 NPC，效率翻倍。</p>
+
+        <div class="tip-box">
+          <strong>💰 收益优先级：</strong>雨天钓彩虹鱼（300 金/条）> 晴天钓锦鲤（500 金/条）> 日常钓草鱼批量卖。彩虹天务必全天钓鱼，收益翻倍最划算。
+        </div>
+
+      </div>
+
+      <div class="back-bar">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 心动小镇攻略站 · 玩家自建攻略站，非官方网站</p>
+    <p style="font-size:0.85rem;margin-top:4px;opacity:0.7;">游戏版权归心动小镇（Heartopia）开发团队所有</p>
+  </footer>
+
+</body>
+</html>
