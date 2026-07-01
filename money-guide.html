@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>赚钱秘籍 - 心动小镇攻略站</title>
+  <meta name="description" content="心动小镇最快赚钱路线：订单系统、钓鱼卖钱、采集卖材料、种植作物、每日委托，帮你快速积累金币。">
+  <style>
+    :root {
+      --bg: #FFF8F0;
+      --primary: #FFB347;
+      --primary-dark: #f09a1e;
+      --green: #90EE90;
+      --green-dark: #5ec85e;
+      --text: #5a4535;
+      --subtext: #8c7560;
+      --white: #ffffff;
+      --radius: 20px;
+      --shadow: 0 8px 28px rgba(255,179,71,0.13);
+      --shadow-hover: 0 14px 36px rgba(255,179,71,0.22);
+      --max-w: 800px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(var(--max-w), 94%);
+      margin: 0 auto;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(255,248,240,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,179,71,0.12);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      white-space: nowrap;
+    }
+
+    .logo-icon {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--primary), #ffd18c);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(255,179,71,0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      padding: 8px 14px;
+      border-radius: 99px;
+      font-size: 0.93rem;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,179,71,0.15);
+      color: var(--primary-dark);
+    }
+
+    .nav-links .active {
+      background: rgba(255,179,71,0.2);
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    .breadcrumb {
+      padding: 20px 0 10px;
+      font-size: 0.9rem;
+      color: var(--subtext);
+    }
+
+    .breadcrumb a { color: var(--primary-dark); }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    .article-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 40px 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,179,71,0.12);
+      margin-bottom: 24px;
+    }
+
+    .article-header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,179,71,0.15);
+    }
+
+    .article-tag {
+      display: inline-block;
+      background: rgba(144,238,144,0.22);
+      color: #4a854a;
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+    }
+
+    .article-title {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    .article-meta {
+      color: var(--subtext);
+      font-size: 0.9rem;
+    }
+
+    .toc {
+      background: rgba(255,179,71,0.08);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(255,179,71,0.15);
+    }
+
+    .toc h3 {
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      color: var(--primary-dark);
+    }
+
+    .toc ul {
+      list-style: none;
+      padding-left: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 6px;
+    }
+
+    .toc li {
+      padding: 6px 0;
+      font-size: 0.95rem;
+    }
+
+    .toc a {
+      color: var(--text);
+      display: block;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .toc a:hover {
+      background: rgba(255,179,71,0.1);
+    }
+
+    .article-body h2 {
+      font-size: 1.3rem;
+      color: var(--primary-dark);
+      margin: 32px 0 16px;
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .article-body h3 {
+      font-size: 1.1rem;
+      color: var(--text);
+      margin: 24px 0 12px;
+    }
+
+    .article-body p {
+      margin-bottom: 16px;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .article-body ul, .article-body ol {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+
+    .article-body li {
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .article-body strong {
+      color: var(--primary-dark);
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.95rem;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .data-table th {
+      background: rgba(255,179,71,0.15);
+      color: #8b6914;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      border-bottom: 2px solid rgba(255,179,71,0.2);
+    }
+
+    .data-table td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(255,179,71,0.1);
+      color: var(--text);
+    }
+
+    .data-table tr:nth-child(even) {
+      background: rgba(255,248,240,0.5);
+    }
+
+    .data-table tr:hover {
+      background: rgba(255,179,71,0.06);
+    }
+
+    .tip-box {
+      background: rgba(144,238,144,0.12);
+      border-left: 4px solid var(--green);
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+      color: #4d7a4d;
+    }
+
+    .tip-box strong { color: #3a6a3a; }
+
+    .warning-box {
+      background: rgba(255,179,71,0.1);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+      color: var(--text);
+    }
+
+    .step-card {
+      display: flex;
+      gap: 16px;
+      padding: 18px;
+      background: rgba(255,248,240,0.8);
+      border-radius: 16px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(255,179,71,0.12);
+    }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 0.9rem;
+    }
+
+    .step-content h4 {
+      color: var(--primary-dark);
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      color: var(--subtext);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(255,179,71,0.1), rgba(144,238,144,0.1));
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px 0;
+      border: 1px solid rgba(255,179,71,0.15);
+    }
+
+    .highlight-box h4 {
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .back-bar {
+      margin: 32px 0;
+      text-align: center;
+    }
+
+    .back-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      border-radius: 99px;
+      font-size: 1rem;
+      box-shadow: 0 6px 14px rgba(255,179,71,0.22);
+      transition: transform 0.2s;
+    }
+
+    .back-btn:hover { transform: translateY(-2px); }
+
+    .footer {
+      margin-top: 40px;
+      border-top: 1px solid rgba(255,179,71,0.12);
+      background: rgba(255,255,255,0.5);
+      padding: 24px 0;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--subtext);
+    }
+
+    @media (max-width: 600px) {
+      .article-card { padding: 24px 18px; }
+      .article-title { font-size: 1.4rem; }
+      .nav { flex-direction: column; height: auto; padding: 12px 0; align-items: flex-start; }
+      .nav-links { width: 100%; }
+      .toc ul { grid-template-columns: 1fr; }
+      .data-table { font-size: 0.85rem; }
+      .data-table th, .data-table td { padding: 8px; }
+      .step-card { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="wrap nav">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">❤</span>
+        <span>心动小镇攻略站</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="index.html#guides">攻略汇总</a>
+        <a href="newbie-guide.html">新手攻略</a>
+        <a href="fishing-guide.html">钓鱼图鉴</a>
+        <a href="money-guide.html" class="active">赚钱秘籍</a>
+        <a href="index.html#codes">兑换码</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="breadcrumb">
+      <a href="index.html">首页</a> &gt; <span>赚钱秘籍</span>
+    </div>
+
+    <article class="article-card">
+      <div class="article-header">
+        <span class="article-tag">💰 高效赚钱</span>
+        <h1 class="article-title">心动小镇赚钱秘籍：快速积累金币</h1>
+        <p class="article-meta">更新时间：2026-07-01 | 阅读时间：约 6 分钟</p>
+      </div>
+
+      <div class="toc">
+        <h3>📋 本文目录</h3>
+        <ul>
+          <li><a href="#s1">一、订单系统（最稳定）</a></li>
+          <li><a href="#s2">二、钓鱼卖钱（零成本高收益）</a></li>
+          <li><a href="#s3">三、采集卖材料（白捡的钱）</a></li>
+          <li><a href="#s4">四、种植作物（睡后收入）</a></li>
+          <li><a href="#s5">五、每日委托与活动</a></li>
+          <li><a href="#s6">六、收益对比与每日路线</a></li>
+        </ul>
+      </div>
+
+      <div class="article-body">
+
+        <h2 id="s1">一、订单系统（最稳定）</h2>
+        <p>订单系统是前期<strong>最稳定、最可控</strong>的金币来源。公告板每天刷新多个订单，完成后直接获得金币奖励。</p>
+
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>优先接种植类订单</h4>
+            <p>要求交付农作物的订单最划算，因为你可以控制种植时间，提前准备好作物直接交任务。</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>留意高价值订单</h4>
+            <p>部分订单要求交付鱼类或家具，奖励可达 1000+ 金币。如果手里刚好有，优先做这类。</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>刷新订单技巧</h4>
+            <p>每天 6:00 订单自动刷新。如果当前订单奖励太低，可以用少量金币手动刷新，刷出高价订单再接。</p>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 小贴士：</strong>睡前种下长周期作物（如南瓜 8 小时），第二天醒来直接收获交订单，时间利用率最高。
+        </div>
+
+        <h2 id="s2">二、钓鱼卖钱（零成本高收益）</h2>
+        <p>钓鱼几乎<strong>不消耗体力</strong>（每次约 5 点），钓到的鱼可以直接卖给商店，是前期性价比最高的赚钱方式。</p>
+
+        <table class="data-table">
+          <tr>
+            <th>鱼类</th>
+            <th>出现条件</th>
+            <th>基础售价</th>
+            <th>推荐指数</th>
+          </tr>
+          <tr>
+            <td>沙丁鱼</td>
+            <td>海边码头，全天</td>
+            <td>40 金币</td>
+            <td>⭐⭐⭐（量大稳定）</td>
+          </tr>
+          <tr>
+            <td>河豚</td>
+            <td>海边码头，晴天白天</td>
+            <td>70 金币</td>
+            <td>⭐⭐⭐（常见且值钱）</td>
+          </tr>
+          <tr>
+            <td>彩虹鱼</td>
+            <td>海边码头，雨天夜晚</td>
+            <td>300 金币</td>
+            <td>⭐⭐⭐⭐⭐（雨天必钓）</td>
+          </tr>
+          <tr>
+            <td>锦鲤</td>
+            <td>小镇河流，晴天白天</td>
+            <td>500 金币</td>
+            <td>⭐⭐⭐⭐⭐（晴天首选）</td>
+          </tr>
+        </table>
+
+        <div class="highlight-box">
+          <h4>🎯 钓鱼赚钱公式</h4>
+          <p>晴天 → 钓锦鲤（500 金/条）<br>
+          雨天 → 钓彩虹鱼（300 金/条）<br>
+          普通天 → 批量钓沙丁鱼/河豚（量大积少成多）</p>
+        </div>
+
+        <h2 id="s3">三、采集卖材料（白捡的钱）</h2>
+        <p>地图上的采集物<strong>完全不消耗体力</strong>，看到就捡，积少成多也是一笔可观收入。</p>
+
+        <ul>
+          <li><strong>野花/蘑菇：</strong>路边随机刷新，每个 5-15 金币，绕地图一圈能捡 50+ 个</li>
+          <li><strong>矿石：</strong>山区挖矿，铁矿 20 金币/个，每日限采 10 次</li>
+          <li><strong>木材/树枝：</strong>砍树副产品，直接出售或留作 crafting 材料</li>
+          <li><strong>海贝壳：</strong>海边专属，部分 NPC 高价收购，比直接卖商店更赚</li>
+        </ul>
+
+        <div class="warning-box">
+          <strong>⚠️ 注意：</strong>金色、紫色品质的稀有材料建议先留着，后期做高级家具或任务需要，不要急着卖。
+        </div>
+
+        <h2 id="s4">四、种植作物（睡后收入）</h2>
+        <p>种植是<strong>被动收入</strong>的核心，种下后等待成熟即可收获。合理规划作物周期，可以实现"离线也赚钱"。</p>
+
+        <table class="data-table">
+          <tr>
+            <th>作物</th>
+            <th>生长周期</th>
+            <th>收获售价</th>
+            <th>适合场景</th>
+          </tr>
+          <tr>
+            <td>小麦</td>
+            <td>2 小时</td>
+            <td>30 金币</td>
+            <td>白天在线时批量种</td>
+          </tr>
+          <tr>
+            <td>番茄</td>
+            <td>4 小时</td>
+            <td>60 金币</td>
+            <td>半天周期，适合下午种</td>
+          </tr>
+          <tr>
+            <td>胡萝卜</td>
+            <td>3 小时</td>
+            <td>45 金币</td>
+            <td>性价比最高，推荐主力</td>
+          </tr>
+          <tr>
+            <td>南瓜</td>
+            <td>8 小时</td>
+            <td>120 金币</td>
+            <td>睡前种，醒来收</td>
+          </tr>
+          <tr>
+            <td>草莓</td>
+            <td>6 小时</td>
+            <td>90 金币</td>
+            <td>做果酱收益翻倍</td>
+          </tr>
+        </table>
+
+        <div class="tip-box">
+          <strong>🍓 果酱暴利：</strong>4 个草莓做成草莓果酱，售价 335 金币，成本约 40 金币，净利润 295 金币。烹饪等级越高，高品质果酱售价更高。
+        </div>
+
+        <h2 id="s5">五、每日委托与活动</h2>
+        <p>除了订单系统，每日委托和限时活动也是稳定收入来源。</p>
+
+        <ul>
+          <li><strong>每日委托：</strong>公告板旁边 NPC 发布，每天 3 个，奖励金币 + 经验</li>
+          <li><strong>签到奖励：</strong>连续签到第 3/7 天有额外金币礼包</li>
+          <li><strong>限时活动：</strong>节日活动、版本更新活动通常送 500-2000 金币</li>
+          <li><strong>成就奖励：</strong>完成"钓上 100 条鱼"、"收获 500 个作物"等成就，一次性奖励丰厚</li>
+        </ul>
+
+        <h2 id="s6">六、收益对比与每日路线</h2>
+        <p>综合以上方法，推荐一条<strong>每日最优赚钱路线</strong>，按优先级排序：</p>
+
+        <table class="data-table">
+          <tr>
+            <th>优先级</th>
+            <th>活动</th>
+            <th>预估收益</th>
+            <th>耗时</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>完成订单系统（3-5 个）</td>
+            <td>800-1500 金币</td>
+            <td>20 分钟</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>钓鱼 30 次（看天气选鱼种）</td>
+            <td>600-2000 金币</td>
+            <td>30 分钟</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>采集绕地图一圈</td>
+            <td>200-400 金币</td>
+            <td>15 分钟</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>每日委托</td>
+            <td>300-600 金币</td>
+            <td>10 分钟</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>种植 + 烹饪果酱</td>
+            <td>400-800 金币</td>
+            <td>被动（每天收 2-3 次）</td>
+          </tr>
+        </table>
+
+        <div class="highlight-box">
+          <h4>💰 每日总收益预估</h4>
+          <p>按以上路线执行，<strong>每天可稳定获得 2000-4000 金币</strong>。遇到雨天/彩虹天钓鱼收益翻倍，活动日额外 +1000 金币。</p>
+        </div>
+
+        <div class="tip-box">
+          <strong>🎯 新手建议：</strong>前 3 天优先完成订单 + 钓鱼，快速积累启动资金到 5000 金币。之后投资种子和工具升级，形成"种植→烹饪→订单→钓鱼"的良性循环。
+        </div>
+
+      </div>
+
+      <div class="back-bar">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 心动小镇攻略站 · 玩家自建攻略站，非官方网站</p>
+    <p style="font-size:0.85rem;margin-top:4px;opacity:0.7;">游戏版权归心动小镇（Heartopia）开发团队所有</p>
+  </footer>
+
+</body>
+</html>
