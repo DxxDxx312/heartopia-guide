@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新手入门攻略 - 心动小镇攻略站</title>
+  <meta name="description" content="心动小镇新手第一天完整攻略，包含开局流程、体力分配、每日必做和前期赚钱方法。">
+  <style>
+    :root {
+      --bg: #FFF8F0;
+      --primary: #FFB347;
+      --primary-dark: #f09a1e;
+      --green: #90EE90;
+      --green-dark: #5ec85e;
+      --text: #5a4535;
+      --subtext: #8c7560;
+      --white: #ffffff;
+      --radius: 20px;
+      --shadow: 0 8px 28px rgba(255,179,71,0.13);
+      --shadow-hover: 0 14px 36px rgba(255,179,71,0.22);
+      --max-w: 800px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(var(--max-w), 94%);
+      margin: 0 auto;
+    }
+
+    /* 导航栏 */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(255,248,240,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,179,71,0.12);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      white-space: nowrap;
+    }
+
+    .logo-icon {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--primary), #ffd18c);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(255,179,71,0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      padding: 8px 14px;
+      border-radius: 99px;
+      font-size: 0.93rem;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,179,71,0.15);
+      color: var(--primary-dark);
+    }
+
+    .nav-links .active {
+      background: rgba(255,179,71,0.2);
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    /* 面包屑 */
+    .breadcrumb {
+      padding: 20px 0 10px;
+      font-size: 0.9rem;
+      color: var(--subtext);
+    }
+
+    .breadcrumb a { color: var(--primary-dark); }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    /* 文章卡片 */
+    .article-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 40px 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,179,71,0.12);
+      margin-bottom: 24px;
+    }
+
+    .article-header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,179,71,0.15);
+    }
+
+    .article-tag {
+      display: inline-block;
+      background: rgba(144,238,144,0.22);
+      color: #4a854a;
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+    }
+
+    .article-title {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    .article-meta {
+      color: var(--subtext);
+      font-size: 0.9rem;
+    }
+
+    /* 目录 */
+    .toc {
+      background: rgba(255,179,71,0.08);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(255,179,71,0.15);
+    }
+
+    .toc h3 {
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      color: var(--primary-dark);
+    }
+
+    .toc ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .toc li {
+      padding: 6px 0;
+      font-size: 0.95rem;
+    }
+
+    .toc a {
+      color: var(--text);
+      display: block;
+      padding: 4px 0;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .toc a:hover {
+      background: rgba(255,179,71,0.1);
+      padding-left: 8px;
+    }
+
+    /* 正文 */
+    .article-body h2 {
+      font-size: 1.3rem;
+      color: var(--primary-dark);
+      margin: 32px 0 16px;
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .article-body h3 {
+      font-size: 1.1rem;
+      color: var(--text);
+      margin: 24px 0 12px;
+    }
+
+    .article-body p {
+      margin-bottom: 16px;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .article-body ul, .article-body ol {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+
+    .article-body li {
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .article-body strong {
+      color: var(--primary-dark);
+    }
+
+    .tip-box {
+      background: rgba(144,238,144,0.12);
+      border-left: 4px solid var(--green);
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+      color: #4d7a4d;
+    }
+
+    .tip-box strong {
+      color: #3a6a3a;
+    }
+
+    .warning-box {
+      background: rgba(255,179,71,0.1);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+      color: var(--text);
+    }
+
+    /* 返回按钮 */
+    .back-bar {
+      margin: 32px 0;
+      text-align: center;
+    }
+
+    .back-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      border-radius: 99px;
+      font-size: 1rem;
+      box-shadow: 0 6px 14px rgba(255,179,71,0.22);
+      transition: transform 0.2s;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* 页脚 */
+    .footer {
+      margin-top: 40px;
+      border-top: 1px solid rgba(255,179,71,0.12);
+      background: rgba(255,255,255,0.5);
+      padding: 24px 0;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--subtext);
+    }
+
+    /* 响应式 */
+    @media (max-width: 600px) {
+      .article-card { padding: 24px 18px; }
+      .article-title { font-size: 1.4rem; }
+      .nav { flex-direction: column; height: auto; padding: 12px 0; align-items: flex-start; }
+      .nav-links { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="wrap nav">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">❤</span>
+        <span>心动小镇攻略站</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="index.html#guides">攻略汇总</a>
+        <a href="newbie-guide.html" class="active">新手攻略</a>
+        <a href="index.html#codes">兑换码</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="breadcrumb">
+      <a href="index.html">首页</a> &gt; <span>新手入门攻略</span>
+    </div>
+
+    <article class="article-card">
+      <div class="article-header">
+        <span class="article-tag">📖 推荐入门</span>
+        <h1 class="article-title">心动小镇新手入门攻略：第一天该做什么</h1>
+        <p class="article-meta">更新时间：2026-07-01 | 阅读时间：约 5 分钟</p>
+      </div>
+
+      <div class="toc">
+        <h3>📋 本文目录</h3>
+        <ul>
+          <li><a href="#s1">一、开局流程（前30分钟）</a></li>
+          <li><a href="#s2">二、体力分配技巧</a></li>
+          <li><a href="#s3">三、每日必做清单</a></li>
+          <li><a href="#s4">四、前期赚钱方法</a></li>
+          <li><a href="#s5">五、常见新手误区</a></li>
+        </ul>
+      </div>
+
+      <div class="article-body">
+
+        <h2 id="s1">一、开局流程（前30分钟）</h2>
+        <p>进入游戏后，先跟着<strong>新手引导</strong>走，不要跳过。引导会教你基础操作：移动、交互、种植、钓鱼等。完成引导后，你会获得第一笔金币和基础种子。</p>
+        
+        <p>引导结束后，<strong>优先做这3件事</strong>：</p>
+        <ol>
+          <li><strong>领取邮件奖励</strong> — 新手礼包通常包含金币、种子和体力道具</li>
+          <li><strong>查看任务列表</strong> — 主线任务给的经验和金币非常丰厚，前期跟着主线走最划算</li>
+          <li><strong>熟悉地图</strong> — 记住商店、钓鱼点、NPC位置，方便后续日常</li>
+        </ol>
+
+        <div class="tip-box">
+          <strong>💡 小贴士：</strong>开局送的种子不要急着全种完，留一部分种子备用，防止后续任务需要时手里没有。
+        </div>
+
+        <h2 id="s2">二、体力分配技巧</h2>
+        <p>体力是前期最稀缺的资源，<strong>每天自然恢复约100点</strong>，用完后可以用道具补充，但道具有限。建议按以下优先级分配：</p>
+        
+        <ol>
+          <li><strong>主线/支线任务</strong>（优先）— 任务奖励的经验和金币是前期成长的关键</li>
+          <li><strong>种植作物</strong> — 选择生长周期短、售价高的作物，如胡萝卜（3小时）或番茄（6小时）</li>
+          <li><strong>钓鱼</strong> — 体力消耗低，收益稳定，还能完成图鉴收集</li>
+          <li><strong>采集</strong> — 地图上的野花、矿石等，不消耗体力，看到就捡</li>
+        </ol>
+
+        <div class="warning-box">
+          <strong>⚠️ 注意：</strong>不要在前几天就把体力道具全用掉！留到后期有高收益活动或急需完成任务时再用。
+        </div>
+
+        <h2 id="s3">三、每日必做清单</h2>
+        <p>每天上线后，按这个顺序做，效率最高：</p>
+        
+        <ol>
+          <li><strong>签到</strong> — 连续签到有额外奖励</li>
+          <li><strong>收菜</strong> — 收取前一天种下的作物，重新播种</li>
+          <li><strong>完成每日委托</strong> — 公告板上的3个每日任务，奖励金币和经验</li>
+          <li><strong>和NPC对话</strong> — 部分NPC每天第一次对话会送小礼物</li>
+          <li><strong>钓鱼10次</strong> — 完成每日钓鱼成就，拿额外奖励</li>
+          <li><strong>查看商店</strong> — 每天刷新，偶尔有稀有种子或家具</li>
+        </ol>
+
+        <h2 id="s4">四、前期赚钱方法</h2>
+        <p>前期金币紧张，推荐几个<strong>零成本高收益</strong>的方法：</p>
+
+        <h3>1. 订单系统（最推荐）</h3>
+        <p>公告板上的订单任务，完成一个能赚几百到上千金币。优先做<strong>要求种植作物的订单</strong>，因为你可以控制产出时间。</p>
+
+        <h3>2. 钓鱼卖钱</h3>
+        <p>钓鱼几乎不消耗体力，钓到的鱼可以直接卖给商店。稀有鱼价格更高，但前期以量取胜，多钓普通鱼也能稳定收入。</p>
+
+        <h3>3. 采集卖材料</h3>
+        <p>地图上的野花、蘑菇、矿石等采集物，不消耗任何资源，捡起来直接卖。每天绕地图一圈，能捡不少。</p>
+
+        <div class="tip-box">
+          <strong>💡 赚钱优先级：</strong>订单系统 > 钓鱼 > 采集 > 种植。前期不要把所有地都种满，留几块空地应对突发订单。
+        </div>
+
+        <h2 id="s5">五、常见新手误区</h2>
+        <p>很多新手容易犯的错误，提前避开：</p>
+        
+        <ul>
+          <li><strong>❌ 把金币全用来买装饰品</strong> — 前期家具对进度没有帮助，先投资种子和工具</li>
+          <li><strong>❌ 体力用完才下线</strong> — 体力会自然恢复，但作物不会自动收获。下线前确保作物已收、已种</li>
+          <li><strong>❌ 忽视主线任务</strong> — 主线解锁功能和地图区域，卡关了优先做主线</li>
+          <li><strong>❌ 随便卖稀有材料</strong> — 金色、紫色品质的材料先留着，后期做高级家具或任务需要</li>
+          <li><strong>❌ 不关注活动</strong> — 限时活动奖励通常非常丰厚，新手期赶上活动是快速追赶的好机会</li>
+        </ul>
+
+        <div class="tip-box">
+          <strong>🎯 总结：</strong>新手前3天的核心目标就是——跟着主线走、合理分配体力、每天完成订单和委托、积攒金币和材料。3天后你对游戏有了基本理解，再根据自己的喜好深入发展（钓鱼、装修、社交等）。
+        </div>
+
+      </div>
+
+      <div class="back-bar">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 心动小镇攻略站 · 玩家自建攻略站，非官方网站</p>
+    <p style="font-size:0.85rem;margin-top:4px;opacity:0.7;">游戏版权归心动小镇（Heartopia）开发团队所有</p>
+  </footer>
+
+</body>
+</html>
