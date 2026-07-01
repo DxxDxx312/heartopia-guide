@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>钓鱼图鉴大全 - 心动小镇攻略站</title>
+  <meta name="description" content="心动小镇钓鱼全图鉴，包含鱼类分布、出现条件、天气时间影响、稀有鱼钓法与鱼类用途汇总。">
+  <style>
+    :root {
+      --bg: #FFF8F0;
+      --primary: #FFB347;
+      --primary-dark: #f09a1e;
+      --green: #90EE90;
+      --green-dark: #5ec85e;
+      --text: #5a4535;
+      --subtext: #8c7560;
+      --white: #ffffff;
+      --radius: 20px;
+      --shadow: 0 8px 28px rgba(255,179,71,0.13);
+      --shadow-hover: 0 14px 36px rgba(255,179,71,0.22);
+      --max-w: 800px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(var(--max-w), 94%);
+      margin: 0 auto;
+    }
+
+    /* 导航栏 */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(255,248,240,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,179,71,0.12);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      white-space: nowrap;
+    }
+
+    .logo-icon {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--primary), #ffd18c);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(255,179,71,0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      padding: 8px 14px;
+      border-radius: 99px;
+      font-size: 0.93rem;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,179,71,0.15);
+      color: var(--primary-dark);
+    }
+
+    .nav-links .active {
+      background: rgba(255,179,71,0.2);
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    /* 面包屑 */
+    .breadcrumb {
+      padding: 20px 0 10px;
+      font-size: 0.9rem;
+      color: var(--subtext);
+    }
+
+    .breadcrumb a { color: var(--primary-dark); }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    /* 文章卡片 */
+    .article-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 40px 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,179,71,0.12);
+      margin-bottom: 24px;
+    }
+
+    .article-header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,179,71,0.15);
+    }
+
+    .article-tag {
+      display: inline-block;
+      background: rgba(144,238,144,0.22);
+      color: #4a854a;
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+    }
+
+    .article-title {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    .article-meta {
+      color: var(--subtext);
+      font-size: 0.9rem;
+    }
+
+    /* 目录 */
+    .toc {
+      background: rgba(255,179,71,0.08);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(255,179,71,0.15);
+    }
+
+    .toc h3 {
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      color: var(--primary-dark);
+    }
+
+    .toc ul {
+      list-style: none;
+      padding-left: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 6px;
+    }
+
+    .toc li {
+      padding: 6px 0;
+      font-size: 0.95rem;
+    }
+
+    .toc a {
+      color: var(--text);
+      display: block;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .toc a:hover {
+      background: rgba(255,179,71,0.1);
+    }
+
+    /* 正文 */
+    .article-body h2 {
+      font-size: 1.3rem;
+      color: var(--primary-dark);
+      margin: 32px 0 16px;
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .article-body h3 {
+      font-size: 1.1rem;
+      color: var(--text);
+      margin: 24px 0 12px;
+    }
+
+    .article-body p {
+      margin-bottom: 16px;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .article-body ul, .article-body ol {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+
+    .article-body li {
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .article-body strong {
+      color: var(--primary-dark);
+    }
+
+    /* 表格 */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.95rem;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .data-table th {
+      background: rgba(255,179,71,0.15);
+      color: #8b6914;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      border-bottom: 2px solid rgba(255,179,71,0.2);
+    }
+
+    .data-table td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(255,179,71,0.1);
+      color: var(--text);
+    }
+
+    .data-table tr:nth-child(even) {
+      background: rgba(255,248,240,0.5);
+    }
+
+    .data-table tr:hover {
+      background: rgba(255,179,71,0.06);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .tag-common { background: #e8f5e9; color: #2e7d32; }
+    .tag-rare { background: #fff3e0; color: #ef6c00; }
+    .tag-legend { background: #fce4ec; color: #c62828; }
+
+    /* 提示框 */
+    .tip-box {
+      background: rgba(144,238,144,0.12);
+      border-left: 4px solid var(--green);
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+      color: #4d7a4d;
+    }
+
+    .tip-box strong { color: #3a6a3a; }
+
+    .warning-box {
+      background: rgba(255,179,71,0.1);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+      color: var(--text);
+    }
+
+    /* 步骤卡片 */
+    .step-card {
+      display: flex;
+      gap: 16px;
+      padding: 18px;
+      background: rgba(255,248,240,0.8);
+      border-radius: 16px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(255,179,71,0.12);
+    }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 0.9rem;
+  
