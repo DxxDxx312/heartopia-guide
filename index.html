@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>心动小镇攻略站 - Heartopia 手游攻略</title>
+  <meta name="description" content="心动小镇（Heartopia）手游攻略网站，包含新手攻略、钓鱼图鉴、赚钱指南、兑换码汇总等。">
+  <style>
+    :root {
+      --bg: #FFF8F0;
+      --primary: #FFB347;
+      --primary-dark: #f09a1e;
+      --green: #90EE90;
+      --green-dark: #5ec85e;
+      --text: #5a4535;
+      --subtext: #8c7560;
+      --white: #ffffff;
+      --radius: 20px;
+      --shadow: 0 8px 28px rgba(255,179,71,0.13);
+      --shadow-hover: 0 14px 36px rgba(255,179,71,0.22);
+      --max-w: 1160px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(var(--max-w), 94%);
+      margin: 0 auto;
+    }
+
+    /* ========== 导航栏 ========== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(255,248,240,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,179,71,0.12);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      white-space: nowrap;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--primary), #ffd18c);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(255,179,71,0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      padding: 8px 14px;
+      border-radius: 99px;
+      font-size: 0.93rem;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,179,71,0.15);
+      color: var(--primary-dark);
+    }
+
+    /* ========== Hero ========== */
+    .hero {
+      padding: 60px 0 40px;
+    }
+
+    .hero-box {
+      position: relative;
+      background: var(--white);
+      border-radius: 30px;
+      padding: 54px 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,179,71,0.12);
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero-box::before {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,179,71,0.1);
+      border-radius: 50%;
+      top: -60px;
+      right: -40px;
+    }
+
+    .hero-box::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      background: rgba(144,238,144,0.12);
+      border-radius: 50%;
+      bottom: -40px;
+      left: -30px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(144,238,144,0.22);
+      color: #4a854a;
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 0.88rem;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-box h1 {
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      line-height: 1.2;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-box .hero-desc {
+      margin: 14px auto 26px;
+      color: var(--subtext);
+      font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+      max-width: 580px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--bg);
+      border-radius: 99px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,179,71,0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    .search-bar-icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,179,71,0.15);
+      border-radius: 50%;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .search-bar input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 1rem;
+      color: var(--text);
+      min-width: 0;
+    }
+
+    .search-bar input::placeholder {
+      color: #bba48e;
+    }
+
+    .search-hint {
+      margin-top: 12px;
+      font-size: 0.87rem;
+      color: var(--subtext);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ========== 攻略卡片区 ========== */
+    .section {
+      padding: 20px 0 36px;
+    }
+
+    .section-heading {
+      font-size: clamp(1.4rem, 2vw, 1.8rem);
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      color: var(--subtext);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid rgba(255,179,71,0.12);
+      border-radius: var(--radius);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .card:nth-child(2) { animation-delay: 0.06s; }
+    .card:nth-child(3) { animation-delay: 0.12s; }
+    .card:nth-child(4) { animation-delay: 0.18s; }
+    .card:nth-child(5) { animation-delay: 0.24s; }
+    .card:nth-child(6) { animation-delay: 0.30s; }
+
+    .card:hover {
+      transform: translateY(-5px) scale(1.015);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .card-emoji {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 1.3rem;
+      background: linear-gradient(135deg, var(--primary), #ffcf80);
+      color: var(--white);
+      box-shadow: 0 6px 14px rgba(255,179,71,0.2);
+    }
+
+    .card-badge {
+      font-size: 0.8rem;
+      background: rgba(144,238,144,0.2);
+      color: #4a854a;
+      padding: 5px 10px;
+      border-radius: 99px;
+    }
+
+    .card h3 {
+      font-size: 1.12rem;
+      margin-bottom: 8px;
+    }
+
+    .card .card-desc {
+      color: var(--subtext);
+      font-size: 0.93rem;
+      flex: 1;
+      margin-bottom: 16px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-footer span {
+      font-size: 0.85rem;
+      color: #a89070;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 9px 16px;
+      border-radius: 99px;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      box-shadow: 0 6px 14px rgba(255,179,71,0.22);
+      transition: transform 0.2s, filter 0.2s;
+    }
+
+    .btn:hover {
+      filter: brightness(1.05);
+    }
+
+    .btn:active {
+      transform: scale(0.94);
+    }
+
+    .card-hidden {
+      display: none !important;
+    }
+
+    .no-result {
+      display: none;
+      text-align: center;
+      color: var(--subtext);
+      padding: 28px;
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px dashed rgba(255,179,71,0.25);
+      margin-top: 16px;
+    }
+
+    /* ========== 兑换码板块 ========== */
+    .codes-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+    }
+
+    .panel {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,179,71,0.12);
+    }
+
+    .panel h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .panel .panel-desc {
+      color: var(--subtext);
+      font-size: 0.93rem;
+      margin-bottom: 18px;
+    }
+
+    .code-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .code-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--bg);
+      border-radius: 14px;
+      border: 1px solid rgba(144,238,144,0.22);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .code-row:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(144,238,144,0.12);
+    }
+
+    .code-info {
+      min-width: 0;
+    }
+
+    .code-label {
+      display: inline-block;
+      font-size: 0.78rem;
+      padding: 4px 8px;
+      border-radius: 99px;
+      background: rgba(255,179,71,0.14);
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+    }
+
+    .code-value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      word-break: break-all;
+    }
+
+    .code-reward {
+      color: var(--subtext);
+      font-size: 0.88rem;
+      margin-top: 4px;
+    }
+
+    .copy-btn {
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 10px 16px;
+      border-radius: 99px;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      box-shadow: 0 6px 14px rgba(144,238,144,0.25);
+      white-space: nowrap;
+      transition: transform 0.2s, filter 0.2s;
+    }
+
+    .copy-btn:hover {
+      filter: brightness(1.05);
+    }
+
+    .copy-btn:active {
+      transform: scale(0.94);
+    }
+
+    .copy-btn.done {
+      background: linear-gradient(135deg, #5cbf5c, #3faa3f);
+    }
+
+    .tips-card {
+      background: rgba(144,238,144,0.12);
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 0.92rem;
+      color: #4d7a4d;
+      line-height: 1.9;
+    }
+
+    .tips-card strong {
+      color: #3a6a3a;
+    }
+
+    /* ========== 页脚 ========== */
+    .footer {
+      margin-top: 30px;
+      border-top: 1px solid rgba(255,179,71,0.12);
+      background: rgba(255,255,255,0.5);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px 0;
+      font-size: 0.92rem;
+      color: var(--subtext);
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      padding: 6px 12px;
+      border-radius: 99px;
+      transition: background 0.25s;
+    }
+
+    .footer-links a:hover {
+      background: rgba(255,179,71,0.12);
+      color: var(--primary-dark);
+    }
+
+    /* ========== 动画 ========== */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ========== 响应式 ========== */
+    @media (max-width: 900px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .codes-layout {
+        grid-template-columns: 1fr;
+      }
+      .nav {
+        flex-direction: column;
+        height: auto;
+        padding: 12px 0;
+        align-items: flex-start;
+      }
+      .nav-links {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        padding: 36px 0 24px;
+      }
+      .hero-box {
+        padding: 34px 16px;
+        border-radius: 22px;
+      }
+      .code-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .copy-btn {
+        width: 100%;
+        text-align: center;
+      }
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links a {
+        padding: 7px 10px;
+        font-size: 0.88rem;
+      }
+    }
+  </style>
+</head><body>
+
+  <!-- 顶部导航 -->
+  <header class="header">
+    <div class="wrap nav">
+      <a href="#" class="logo" aria-label="心动小镇攻略站首页">
+        <span class="logo-icon">❤</span>
+        <span>心动小镇攻略站</span>
+      </a>
+      <nav class="nav-links" aria-label="主导航">
+        <a href="#">首页</a>
+        <a href="#guides">新手攻略</a>
+        <a href="#guides">钓鱼图鉴</a>
+        <a href="#guides">赚钱指南</a>
+        <a href="#codes">兑换码</a>
+        <a href="#footer">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero 区域 -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-box">
+          <span class="hero-tag">Heartopia 温馨生活冒险</span>
+          <h1>心动小镇攻略站</h1>
+          <p class="hero-desc">汇集新手教学、钓鱼图鉴、赚钱路线、家具收集与最新兑换码，陪你轻松度过治愈又充满惊喜的小镇时光。</p>
+          <div class="search-bar" role="search" aria-label="搜索攻略">
+            <span class="search-bar-icon" aria-hidden="true">🔍</span>
+            <input type="text" id="searchInput" placeholder="搜索攻略：钓鱼、赚钱、任务、家具…" aria-label="输入关键词搜索攻略">
+          </div>
+          <p class="search-hint">输入关键词可实时筛选下方攻略卡片</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 热门攻略卡片 -->
+    <section class="section" id="guides">
+      <div class="wrap">
+        <h2 class="section-heading">热门攻略</h2>
+        <p class="section-sub">精选 6 大高频内容，从入门到进阶一站搞定。</p>
+
+        <div class="cards-grid" id="cardsGrid">
+
+          <article class="card" data-keywords="新手 入门 开局 升级 萌新 教学 基础">
+            <div class="card-top">
+              <span class="card-emoji">🌱</span>
+              <span class="card-badge">推荐入门</span>
+            </div>
+            <h3>新手入门</h3>
+            <p class="card-desc">开局流程、体力分配、每日必做与前期资源规划，帮你少走弯路快速成长。</p>
+            <div class="card-footer">
+              <span>适合：刚入坑的玩家</span>
+              <button class="btn" type="button">查看攻略</button>
+            </div>
+          </article>
+
+          <article class="card" data-keywords="钓鱼 大全 图鉴 鱼类 鱼点 时间 天气 稀有">
+            <div class="card-top">
+              <span class="card-emoji">🎣</span>
+              <span class="card-badge">人气图鉴</span>
+            </div>
+            <h3>钓鱼大全</h3>
+            <p class="card-desc">常见鱼与稀有鱼出现条件整理，掌握钓点、时间段、天气影响与收藏建议。</p>
+            <div class="card-footer">
+              <span>适合：图鉴收集党</span>
+              <button class="btn" type="button">查看攻略</button>
+            </div>
+          </article>
+
+          <article class="card" data-keywords="赚钱 秘籍 金币 收益 农作物 订单 经营 资源">
+            <div class="card-top">
+              <span class="card-emoji">💰</span>
+              <span class="card-badge">高效赚钱</span>
+            </div>
+            <h3>赚钱秘籍</h3>
+            <p class="card-desc">订单、采集、钓鱼、种植与日常经营收益整合，帮你更快积累金币。</p>
+            <div class="card-footer">
+              <span>适合：想快速致富</span>
+              <button class="btn" type="button">查看攻略</button>
+            </div>
+          </article>
+
+          <article class="card" data-keywords="家具 收集 布置 家园 装饰 套装 室内 美化">
+            <div class="card-top">
+              <span class="card-emoji">🪑</span>
+              <span class="card-badge">家园党最爱</span>
+            </div>
+            <h3>家具收集</h3>
+            <p class="card-desc">追踪家具获取方式、主题套装来源与布置灵感，打造温馨理想小屋。</p>
+            <div class="card-footer">
+              <span>适合：热爱装饰布置</span>
+              <button class="btn" type="button">查看攻略</button>
+            </div>
+          </article>
+
+          <article class="card" data-keywords="任务 攻略 支线 主线 日常 活动 解锁 条件">
+            <div class="card-top">
+              <span class="card-emoji">📋</span>
+              <span class="card-badge">流程整合</span>
+            </div>
+            <h3>任务攻略</h3>
+            <p class="card-desc">覆盖主线、支线与日常委托，整理触发条件与完成技巧，做任务更省心。</p>
+            <div class="card-footer">
+              <span>适合：高效清任务</span>
+              <button class="btn" type="button">查看攻略</button>
+            </div>
+          </article>
+
+          <article class="card" data-keywords="兑换码 汇总 礼包码 福利 激活码 奖励 最新">
+            <div class="card-top">
+              <span class="card-emoji">🎁</span>
+              <span class="card-badge">福利速递</span>
+            </div>
+            <h3>兑换码汇总</h3>
+            <p class="card-desc">第一时间查看可用礼包码、兑换入口与奖励内容，不错过每一份福利。</p>
+            <div class="card-footer">
+              <span>适合：福利党必看</span>
+              <button class="btn" type="button">查看攻略</button>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="no-result" id="noResult">没有找到匹配的攻略，试试其他关键词吧。</div>
+      </div>
+    </section>
+
+    <!-- 兑换码板块 -->
+    <section class="section" id="codes">
+      <div class="wrap">
+        <h2 class="section-heading">兑换码获取渠道</h2>
+        <p class="section-sub">兑换码每日更新且有过期时间，建议去以下官方渠道获取最新有效码。</p>
+
+        <div class="codes-layout">
+          <div class="panel">
+            <div class="code-list" style="gap: 16px;">
+              <div class="code-row" style="flex-direction: column; align-items: flex-start; background: rgba(144,238,144,0.12); border: 1px solid rgba(144,238,144,0.3);">
+                <div class="code-info" style="width: 100%;">
+                  <span class="code-label" style="background: rgba(255,179,71,0.2); color: #e65100;">官方渠道</span>
+                  <p class="code-value" style="font-size: 1.1rem; margin: 8px 0;">TapTap 论坛</p>
+                  <p class="code-reward">打开 TapTap → 搜"心动小镇" → 进论坛看置顶帖和官方公告，兑换码第一时间发布。</p>
+                </div>
+              </div>
+
+              <div class="code-row" style="flex-direction: column; align-items: flex-start; background: rgba(144,238,144,0.12); border: 1px solid rgba(144,238,144,0.3);">
+                <div class="code-info" style="width: 100%;">
+                  <span class="code-label" style="background: rgba(255,179,71,0.2); color: #e65100;">官方渠道</span>
+                  <p class="code-value" style="font-size: 1.1rem; margin: 8px 0;">官方微博 / 微信公众号</p>
+                  <p class="code-reward">关注"心动小镇"官方微博和公众号，版本更新、节日活动必发兑换码。</p>
+                </div>
+              </div>
+
+              <div class="code-row" style="flex-direction: column; align-items: flex-start; background: rgba(144,238,144,0.12); border: 1px solid rgba(144,238,144,0.3);">
+                <div class="code-info" style="width: 100%;">
+                  <span class="code-label" style="background: rgba(255,179,71,0.2); color: #e65100;">玩家社区</span>
+                  <p class="code-value" style="font-size: 1.1rem; margin: 8px 0;">小红书</p>
+                  <p class="code-reward">搜"心动小镇 兑换码"，玩家实时分享最新可用码，注意看发布时间。</p>
+                </div>
+              </div>
+
+              <div class="code-row" style="flex-direction: column; align-items: flex-start; background: rgba(144,238,144,0.12); border: 1px solid rgba(144,238,144,0.3);">
+                <div class="code-info" style="width: 100%;">
+                  <span class="code-label" style="background: rgba(255,179,71,0.2); color: #e65100;">游戏内</span>
+                  <p class="code-value" style="font-size: 1.1rem; margin: 8px 0;">游戏公告 / 邮件</p>
+                  <p class="code-reward">每次版本更新、维护补偿、节日活动，游戏内公告和邮件都会发放兑换码。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="panel">
+            <h3>💡 兑换入口</h3>
+            <p class="panel-desc">游戏内点击：设置 → 兑换码 → 输入码 → 确认领取。</p>
+            <div class="tips-card">
+              <p><strong>注意事项：</strong></p>
+              <p>① 每个兑换码通常只能使用一次</p>
+              <p>② 兑换码有有效期，过期失效</p>
+              <p>③ 区分大小写，建议直接复制粘贴</p>
+              <p>④ 如遇"已失效"说明该码已过期</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="footer" id="footer">
+    <div class="wrap footer-inner">
+      <div>
+        <p>© 2025 心动小镇攻略站 · 玩家自建攻略站，非官方网站</p>
+        <p style="font-size:0.85rem;margin-top:4px;opacity:0.7;">游戏版权归心动小镇（Heartopia）开发团队所有</p>
+      </div>
+      <nav class="footer-links" aria-label="友情链接">
+        <a href="#">返回顶部</a>
+        <a href="#guides">攻略汇总</a>
+        <a href="#codes">兑换码</a>
+        <a href="javascript:void(0)">TapTap 社区</a>
+        <a href="javascript:void(0)">官方微博</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    (function() {
+      "use strict";
+
+      // ===== 搜索过滤 =====
+      var input = document.getElementById("searchInput");
+      var grid = document.getElementById("cardsGrid");
+      var cards = grid.querySelectorAll(".card");
+      var noResult = document.getElementById("noResult");
+
+      input.addEventListener("input", function() {
+        var q = this.value.trim().toLowerCase();
+        var visible = 0;
+
+        for (var i = 0; i < cards.length; i++) {
+          var card = cards[i];
+          var keywords = (card.getAttribute("data-keywords") || "").toLowerCase();
+          var title = card.querySelector("h3").textContent.toLowerCase();
+          var desc = card.querySelector(".card-desc").textContent.toLowerCase();
+          var haystack = keywords + " " + title + " " + desc;
+
+          if (!q || haystack.indexOf(q) !== -1) {
+            card.classList.remove("card-hidden");
+            visible++;
+          } else {
+            card.classList.add("card-hidden");
+          }
+        }
+
+        noResult.style.display = visible === 0 ? "block" : "none";
+      });
+
+      // ===== 兑换码复制 =====
+      var copyBtns = document.querySelectorAll(".copy-btn");
+
+      for (var i = 0; i < copyBtns.length; i++) {
+        copyBtns[i].addEventListener("click", handleCopy);
+      }
+
+      function handleCopy() {
+        var code = this.getAttribute("data-code");
+        var btn = this;
+        if (!code) return;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code).then(function() {
+            feedback(btn);
+          }).catch(function() {
+            fallback(code, btn);
+          });
+        } else {
+          fallback(code, btn);
+        }
+      }
+
+      function fallback(text, btn) {
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand("copy");
+          feedback(btn);
+        } catch (e) {
+          alert("复制失败，请手动复制：" + text);
+        }
+        document.body.removeChild(ta);
+      }
+
+      function feedback(btn) {
+        var orig = btn.textContent;
+        btn.textContent = "✓ 已复制";
+        btn.classList.add("done");
+        setTimeout(function() {
+          btn.textContent = orig;
+          btn.classList.remove("done");
+        }, 1600);
+      }
+    })();
+  </script>
+
+</body>
+</html>
+
